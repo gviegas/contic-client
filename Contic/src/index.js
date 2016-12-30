@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './index.css';
+import { initMap } from './Map';
+import './css/index.css';
+
+window.initMap = initMap;
 
 ReactDOM.render(
   <App />,
