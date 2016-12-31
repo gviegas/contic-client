@@ -3,17 +3,8 @@
 //
 
 import React, { Component } from 'react';
+import GMap, { Instance } from './GMap';
 import './css/Map.css';
-
-/* eslint-disable */
-function _initMap() {
-  var place = {lat : -25.363, lng : 131.044}
-  var map = new google.maps.Map(document.getElementById('MapInstance'), {
-    zoom : 4,
-    center : place
-  });
-}
-export const initMap = _initMap;
 
 class MapInstance extends Component {
   render() {
@@ -31,4 +22,5 @@ class Map extends Component {
   }
 }
 
+export const initMap = Instance.initMap;
 export default Map;
