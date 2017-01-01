@@ -3,8 +3,7 @@
 //
 
 import React, { Component } from 'react';
-import GMap, { Instance } from './GMap';
-import './css/Map.css';
+import GMap from './GMap';
 
 class MapInstance extends Component {
   render() {
@@ -17,10 +16,10 @@ class Map extends Component {
     return (
       <div className="Map">
         <MapInstance />
+        <GMap />
       </div>
     );
   }
 }
 
-export const initMap = Instance.initMap;
 export default Map;
