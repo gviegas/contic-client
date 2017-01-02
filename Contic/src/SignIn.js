@@ -10,8 +10,8 @@
 // -- SignInFormSubmit
 
 import React, { Component } from 'react';
-import signInLogo from './signin-logo.svg';
-import './SignIn.css';
+import signInLogo from './img/signin-logo.svg';
+import './css/SignIn.css';
 
 class SignInLogo extends Component {
   render() { 
@@ -36,7 +36,7 @@ class SignInFormUser extends Component {
   render() {
     return (
       <div className="SignInFormUser">
-        <input type="text" id="SignInFormUser" placeholder="user" maxLength="16" 
+        <input type="email" id="SignInFormUser" placeholder="user" maxLength="40" 
         value={this.props.value}
         onChange={this.handleChange} />
       </div>
@@ -57,7 +57,7 @@ class SignInFormPwd extends Component {
   render() {
     return (
       <div className="SignInFormPwd">
-        <input type="password" id="SignInFormPwd" placeholder="password" maxLength="16" 
+        <input type="password" id="SignInFormPwd" placeholder="password" minLength="8" maxLength="30" 
         value={this.props.value}
         onChange={this.handleChange} />
       </div>

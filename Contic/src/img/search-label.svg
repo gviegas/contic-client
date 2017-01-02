@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   id="svg2"
+   viewBox="0 0 225 225"
+   height="225"
+   width="225">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4187">
+      <stop
+         id="stop4189"
+         offset="0"
+         style="stop-color:#cccccc;stop-opacity:1" />
+      <stop
+         id="stop4191"
+         offset="1"
+         style="stop-color:#e6e6e6;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient
+       gradientTransform="matrix(-0.61037508,0.56391598,-0.54870513,-0.59391162,-29.964911,114.5333)"
+       gradientUnits="userSpaceOnUse"
+       r="54.864777"
+       fy="105.38337"
+       fx="23.286627"
+       cy="105.38337"
+       cx="23.286627"
+       id="radialGradient4193"
+       xlink:href="#linearGradient4187" />
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-185.71428,-292.36221)"
+     id="layer1">
+    <rect
+       y="292.36221"
+       x="185.71428"
+       height="225"
+       width="225"
+       id="rect4136"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+  <g
+     id="layer2">
+    <g
+       transform="matrix(1.0450723,0,0,1.0450723,23.974028,-12.676375)"
+       id="g4207">
+      <circle
+         style="opacity:1;fill:#666666;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path4153"
+         cx="-103.25886"
+         cy="68.189125"
+         r="78.56636"
+         transform="matrix(0,-1,1,0,0,0)" />
+      <circle
+         r="61.88747"
+         cy="68.189125"
+         cx="-103.25886"
+         id="circle4155"
+         style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         transform="matrix(0,-1,1,0,0,0)" />
+      <circle
+         style="opacity:1;fill:url(#radialGradient4193);fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="circle4157"
+         cx="-103.25886"
+         cy="68.189125"
+         r="54.864777"
+         transform="matrix(0,-1,1,0,0,0)" />
+      <rect
+         style="opacity:1;fill:#666666;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect4197"
+         width="19.642857"
+         height="51.808071"
+         x="-34.619469"
+         y="202.92877"
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)" />
+      <rect
+         y="257.77365"
+         x="-34.619469"
+         height="11.468961"
+         width="19.642857"
+         id="rect4205"
+         style="opacity:1;fill:#666666;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)" />
+    </g>
+  </g>
+</svg>
