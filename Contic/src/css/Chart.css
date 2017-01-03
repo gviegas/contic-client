@@ -1,0 +1,19 @@
+#chart {
+  background-color: turquoise;
+}
+
+#chart rect {
+  fill: coral;
+}
+
+/*.axis-x .tick {
+  font-weight: bold;
+  fill: #222;
+}*/
+
+.tick, 
+.axis-y text {
+  font-style: italic;
+  font-weight: bold;
+  fill: #222;
+}
