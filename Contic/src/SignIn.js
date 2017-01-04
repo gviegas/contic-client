@@ -68,7 +68,7 @@ class SignInFormPwd extends Component {
 class SignInFormSubmit extends Component {
   render() {
     return (
-      <div classsName="SignInFormSubmit">
+      <div className="SignInFormSubmit">
         <input type="submit" id="SignInFormSubmit" value="Submit" />
       </div>
     );

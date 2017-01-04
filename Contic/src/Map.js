@@ -5,7 +5,8 @@
 import React, { Component } from 'react';
 import GMap from './GMap';
 
-class MapInstance extends Component {
+// Not used
+class MapInstance extends Component { 
   render() {
     return (<div id="MapInstance"></div>);
   }
