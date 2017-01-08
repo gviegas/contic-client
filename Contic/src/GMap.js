@@ -182,6 +182,7 @@ class InfoWindow extends Component {
     this.open = this.open.bind(this);
     // eslint-disable-next-line
     this.infoWindow = new google.maps.InfoWindow({});
+    this.infoWindow.addListener('closeclick', () => this.props.onClose());
   }
 
   open() {
@@ -203,13 +204,47 @@ class Marker extends Component {
       position : this.props.position,
       map : this.props.map
     });
+    this.selected = false;
     this.marker.addListener('click', () => { 
-      this.props.onClick({marker : this.marker, content : this.props.content});
+      if(!this.props.modeChecked) {
+        this.props.onClick({marker : this.marker, content : this.props.content});
+      } else {
+        if(!this.selected) {
+          this.selected = true;
+          // eslint-disable-next-line
+          this.marker.setAnimation(google.maps.Animation.BOUNCE);
+        } else {
+          this.selected = false;
+          this.marker.setAnimation(null);
+        }
+      }
     });
   }
 
   render() {
     return null;
+  }
+}
+
+class SelectionMode extends Component {
+  constructor(props) {
+    super(props);
+    this.check = this.check.bind(this);
+  }
+
+  check() {
+    this.props.onCheck();
+  }
+
+  render() {
+    return (
+      <div className="SelectionMode">
+        <label>
+          <input type="checkbox" onChange={this.check}></input>
+          Multiple Selection
+        </label>
+      </div>
+    );
   }
 }
 
@@ -228,11 +263,24 @@ class GMap extends Component {
       disableDefaultUI : true      
     });
     this.handleMarkerClick = this.handleMarkerClick.bind(this);
-    this.state = { markerClick : { marker : null, content : '' } };
+    this.handleInfoWindowClose = this.handleInfoWindowClose.bind(this);
+    this.handleModeCheck = this.handleModeCheck.bind(this);
+    this.state = { 
+      markerClick : { marker : null, content : '' },
+      modeChecked : false
+    };
   }
   
   handleMarkerClick(data) {
-    this.setState({ markerClick : data});
+    this.setState({markerClick : data});
+  }
+
+  handleInfoWindowClose() {
+    this.setState({markerClick : null});
+  }
+
+  handleModeCheck() {
+    this.setState({modeChecked : !this.state.modeChecked});
   }
 
   render() {
@@ -244,13 +292,16 @@ class GMap extends Component {
         data={this.state.markerClick} 
         position={info[key]['position']}
         content={info[key]['content']} 
+        modeChecked={this.state.modeChecked} 
         map={this.map} />
       );
     }
     return (
       <div className="GMap">
+        <SelectionMode onCheck={this.handleModeCheck} />
         {markers}
-        <InfoWindow data={this.state.markerClick} map={this.map} />
+        <InfoWindow onClose={this.handleInfoWindowClose} 
+        data={this.state.markerClick} map={this.map} />
       </div>
     );
   }
