@@ -18,14 +18,22 @@ import './css/Home.css';
 // - Map
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.handleMenuOption = this.handleMenuOption.bind(this);
+    this.state = { option : null };
+  }
+
+  handleMenuOption(option) {} // todo
+
   render() {
     return (
       <div className="Home">
         <MainNav />
         <Map />
       </div>
-    )
+    );
   }
 }
 
-export default Home;
+export default Home; 
