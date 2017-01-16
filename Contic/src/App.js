@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import SignIn from './SignIn';
 import Home from './Home';
-import Chart from './Chart';
 import './css/App.css';
 
 class App extends Component {
@@ -14,7 +13,6 @@ class App extends Component {
       <div className="App">
       <SignIn />
       <Home />
-      <Chart />
       </div>
     );
   }

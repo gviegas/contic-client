@@ -283,6 +283,14 @@ class GMap extends Component {
       </div>
     );
   }
+
+  componentWillUnmount() {
+    let elem = document.getElementById('map');
+    while (elem.firstChild) {
+      elem.removeChild(elem.firstChild);
+    }
+    elem.parentNode.removeChild(elem);
+  }
 }
 
 export default GMap;

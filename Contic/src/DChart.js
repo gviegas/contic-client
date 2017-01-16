@@ -2,7 +2,7 @@
 // Created by Gustavo Viegas on 2017/01
 //
 
-import { Component } from 'react';
+import React, { Component } from 'react';
 import * as d3 from 'd3';
 import './css/DChart.css';
 
@@ -3034,7 +3034,7 @@ var info = [
 ];
 
 var options = {
-  root : 'body',
+  root : '.DChart',
   width : 800,
   height : 500,
   margin : { top : 20, right : 20, bottom : 110, left : 40 },
@@ -3173,12 +3173,22 @@ function createChart(settings) {
 }
 
 class DChart extends Component {
-  constructor(props) {
-    super(props);
+  render() {
+    return (
+      <div className="DChart"></div>
+    );
+  }
+
+  componentDidMount() {
     createChart(options)();
   }
-  render() {
-    return null;
+
+  componentWillUnmount() {
+    let elem = document.getElementsByClassName("DChart");
+    while (elem[0].firstChild) {
+      console.log(elem[0]);
+      elem[0].removeChild(elem[0].firstChild);
+    } 
   }
 }
 
