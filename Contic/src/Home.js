@@ -43,27 +43,30 @@ class Home extends Component {
   }
 
   render() {
-    var context = null;
+    let context = null;
+    let current = null;
     switch(this.state.menuOption) {
       case 'Map':
         context = <Map onSelection={this.handleSelection} />;
+        current = 'Map';
         break;
       case 'Real Time':
         context = null; // todo
+        current = 'Real Time';
         break;
       case 'History':
         context = <Chart />;
+        current = 'History';
         break;
     }
-    console.log(context);
     return (
       <div className="Home">
         <MainNav onNavOption={this.handleNavOption} />
-        <ContextMenu count={this.state.count} onOption={this.handleMenuOption} />
+        <ContextMenu context={current} count={this.state.count} onOption={this.handleMenuOption} />
         {context}
       </div>
     );
   }
 }
 
-export default Home; 
+export default Home;

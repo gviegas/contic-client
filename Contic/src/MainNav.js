@@ -70,7 +70,7 @@ class Menu extends Component {
         <MenuIcon onClick={this.handleMenuIconClick} />
         {
           this.state.show && 
-          <MenuList items={['units','zones','history']} />
+          <MenuList items={['Units','Zones','Sign Out']} />
         }
       </div>
     );
@@ -126,7 +126,7 @@ class SearchInput extends Component {
     return (
       <div className="SearchInput">
         <form onSubmit={this.handleSubmit}>
-          <input type="search" 
+          <input type="search" placeholder="search..."
           value={this.props.value} 
           onChange={this.handleChange}
           />

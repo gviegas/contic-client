@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import './css/DChart.css';
 
-var info = [
+const info = [
 {date: "1 Jan 2008",consumption: 26},
 {date: "2 Jan 2008",consumption: 16},
 {date: "3 Jan 2008",consumption: 14},
@@ -3033,7 +3033,7 @@ var info = [
 {date: "28 Dec 2016",consumption: 28},
 ];
 
-var options = {
+const options = {
   root : '.DChart',
   width : 800,
   height : 500,
@@ -3041,6 +3041,16 @@ var options = {
   margin2 : { top : 430, right : 20, bottom : 30, left : 40 },
   parse : '%d %b %Y'
 };
+
+//////// not working inside createChart()... ////////
+function parse(d) {
+  let parseDate = d3.timeParse(options.parse);
+  d.date = parseDate(d.date);
+  d.consumption = +d.consumption;
+  return d;
+}
+const data = info.map((entry) => parse(entry));
+////////////////
 
 function createChart(settings) {
   let width = settings.width - settings.margin.left - settings.margin.right;
@@ -3097,7 +3107,7 @@ function createChart(settings) {
     .attr('class', 'context')
     .attr('transform', `translate(${settings.margin2.left},${settings.margin2.top})`);
 
-  let data = info.map((entry) => parse(entry));
+  //let data = info.map((entry) => parse(entry));
 
   function create() {
       x.domain(d3.extent(data, (d) => d.date));
@@ -3162,12 +3172,12 @@ function createChart(settings) {
     context.select('.brush').call(brush.move, x.range().map(t.invertX, t));
   }
 
-  function parse(d) {
-    let parseDate = d3.timeParse(settings.parse);
-    d.date = parseDate(d.date);
-    d.consumption = +d.consumption;
-    return d;
-  }
+  // function parse(d) {
+  //   let parseDate = d3.timeParse(settings.parse);
+  //   d.date = parseDate(d.date);
+  //   d.consumption = +d.consumption;
+  //   return d;
+  // }
 
   return create;
 }
@@ -3183,13 +3193,13 @@ class DChart extends Component {
     createChart(options)();
   }
 
-  componentWillUnmount() {
-    let elem = document.getElementsByClassName("DChart");
-    while (elem[0].firstChild) {
-      console.log(elem[0]);
-      elem[0].removeChild(elem[0].firstChild);
-    } 
-  }
+  // componentWillUnmount() {
+  //   let elem = document.getElementsByClassName("DChart");
+  //   while (elem[0].firstChild) {
+  //     console.log(elem[0]);
+  //     elem[0].removeChild(elem[0].firstChild);
+  //   } 
+  // }
 }
 
 //export const DChart = createChart(options);
