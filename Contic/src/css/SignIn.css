@@ -1,0 +1,42 @@
+.SignIn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.SignInLogo {
+  margin: auto;
+  padding: 6px 0;
+}
+
+.SignInForm {}
+
+.SignInFormUser {}
+
+.SignInFormPwd {}
+
+.SignInFormSubmit {}
+
+.SignIn input[type=email],
+.SignIn input[type=password] {
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-style: none;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.SignIn input[type=submit] {
+  margin: 16px 0;
+  padding: 16px 18px;
+  background: gold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  
+}
+
+.SignIn input[type=submit]:hover {
+  background-color: goldenrod;
+}

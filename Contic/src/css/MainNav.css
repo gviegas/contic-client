@@ -1,0 +1,22 @@
+.MainNav {
+  display: flex;
+  position: fixed;
+  margin: 8px;
+  padding: 2px 4px;
+  z-index: 1;
+  background-color: whitesmoke;
+  box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.5);
+}
+
+.Menu,
+.Logo,
+.Search {
+  margin: auto;
+  padding: 4px 10px;
+}
+
+.Menu {}
+
+.Logo {}
+
+.Search {}

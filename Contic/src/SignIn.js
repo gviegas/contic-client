@@ -36,12 +36,9 @@ class SignInFormUser extends Component {
   render() {
     return (
       <div className="SignInFormUser">
-        <label>
-          User
-          <input type="email" id="SignInFormUser" maxLength="40" 
-          value={this.props.value}
-          onChange={this.handleChange} />
-        </label>
+        <input type="email" id="SignInFormUser" placeholder="User" maxLength="40" 
+        value={this.props.value}
+        onChange={this.handleChange} />
       </div>
     );
   }
@@ -60,12 +57,9 @@ class SignInFormPwd extends Component {
   render() {
     return (
       <div className="SignInFormPwd">
-        <label>
-          Password
-          <input type="password" id="SignInFormPwd" minLength="8" maxLength="30" 
-          value={this.props.value}
-          onChange={this.handleChange} />
-        </label>
+        <input type="password" id="SignInFormPwd" placeholder="Password" minLength="8" maxLength="30" 
+        value={this.props.value}
+        onChange={this.handleChange} />
       </div>
     );
   }

@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import menuLabel from './img/menu-label.svg';
 import logoLabel from './img/logo.svg';
 import searchLabel from './img/search-label.svg';
+import './css/MainNav.css';
 
 class MenuIcon extends Component {
   constructor(props) {
