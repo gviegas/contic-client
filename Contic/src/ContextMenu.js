@@ -3,6 +3,17 @@
 //
 
 import React, { Component } from 'react';
+import './css/ContextMenu.css';
+
+class ContextMenuItem extends Component {
+  render() {
+    return (
+      <li className="ContextMenuItem">
+        <input type="button" value={this.props.value} onClick={this.props.onClick} />
+      </li>
+    );
+  }
+}
 
 class MapMenu extends Component {
   constructor(props) {
@@ -15,14 +26,17 @@ class MapMenu extends Component {
   }
 
   render() {
+    let items = ['Real Time', 'History'];
+    let listItems = items.map((item) =>
+    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
+    ); 
     return (
       <div className="MapMenu">
         {
           this.props.count > 0 &&
-          <div>
-            <input type="button" value="Real Time" onClick={this.handleOption} />
-            <input type="button" value="History" onClick={this.handleOption} /> 
-          </div>
+          <ul>
+            {listItems}
+          </ul>
         }
       </div>
     );
@@ -40,10 +54,15 @@ class RealTimeMenu extends Component {
   }
 
   render() {
+    let items = ['Map', 'History'];
+    let listItems = items.map((item) =>
+    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
+    );
     return (
       <div className="RealTimeMenu">
-        <input type="button" value="Map" onClick={this.handleOption} />
-        <input type="button" value="History" onClick={this.handleOption} />
+        <ul>
+          {listItems}
+        </ul>
       </div>
     );
   }
@@ -60,10 +79,15 @@ class HistoryMenu extends Component {
   }
 
   render() {
+    let items = ['Map', 'Real Time'];
+    let listItems = items.map((item) =>
+    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
+    );
     return (
       <div className="HistoryMenu">
-        <input type="button" value="Map" onClick={this.handleOption} />
-        <input type="button" value="Real Time" onClick={this.handleOption} />
+        <ul>
+          {listItems}
+        </ul>
       </div>
     );
   }

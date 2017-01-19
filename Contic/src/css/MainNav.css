@@ -1,18 +1,28 @@
 .MainNav {
   display: flex;
   position: fixed;
-  margin: 8px;
-  padding: 2px 4px;
+  padding: 0;
   z-index: 1;
   background-color: whitesmoke;
   box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.5);
+  min-width: 200px;
+  top: 2%;
+  left: 50%;
+  /*margin-right: -50%;*/
+  transform: translate(-50%, -2%);
 }
 
 .Menu,
 .Logo,
 .Search {
   margin: auto;
-  padding: 4px 10px;
+  padding: 4px 8px;
+}
+
+.Menu:hover,
+.Search:hover {
+  box-shadow: 3px 0 4px 0 rgba(4, 4, 4, 0.5), -3px 0 4px 0 rgba(4, 4, 4, 0.5);
+  cursor: pointer;
 }
 
 .Menu {}
