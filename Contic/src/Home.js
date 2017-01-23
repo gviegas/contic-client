@@ -26,8 +26,10 @@ class Home extends Component {
 
   handleNavOption(option) { console.log(`Home - nav option: ${option}`); } // todo
   
-  handleMenuOption(option) { 
-    this.setState({menuOption : option});  
+  handleMenuOption(option) {
+    if(option != this.state.menuOption) { 
+      this.setState({menuOption : option});
+    }  
   }
 
   handleSelection(marker, insert) {
@@ -50,20 +52,18 @@ class Home extends Component {
         context = <Map onSelection={this.handleSelection} />;
         current = 'Map';
         break;
-      case 'Real Time':
-        context = null; // todo
-        current = 'Real Time';
-        break;
-      case 'History':
+      case 'Consumption':
         context = <Chart />;
-        current = 'History';
+        current = 'Consumption';
         break;
     }
     return (
       <div className="Home">
         <MainNav onNavOption={this.handleNavOption} />
         <ContextMenu context={current} count={this.state.count} onOption={this.handleMenuOption} />
-        {context}
+        <div className="Context">
+          {context}
+        </div>
       </div>
     );
   }

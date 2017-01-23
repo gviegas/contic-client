@@ -5,10 +5,12 @@
 import React, { Component } from 'react';
 import './css/ContextMenu.css';
 
+const items = ['Map', 'Consumption'];
+
 class ContextMenuItem extends Component {
   render() {
     return (
-      <li className="ContextMenuItem">
+      <li className={"MenuItem" + this.props.value}>
         <input type="button" value={this.props.value} onClick={this.props.onClick} />
       </li>
     );
@@ -26,7 +28,6 @@ class MapMenu extends Component {
   }
 
   render() {
-    let items = ['Real Time', 'History'];
     let listItems = items.map((item) =>
     <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
     ); 
@@ -43,7 +44,7 @@ class MapMenu extends Component {
   }
 }
 
-class RealTimeMenu extends Component {
+class ConsumptionMenu extends Component {
   constructor(props) {
     super(props);
     this.handleOption = this.handleOption.bind(this);
@@ -54,37 +55,11 @@ class RealTimeMenu extends Component {
   }
 
   render() {
-    let items = ['Map', 'History'];
-    let listItems = items.map((item) =>
+    let listItems = items.map((item) => 
     <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
     );
     return (
-      <div className="RealTimeMenu">
-        <ul>
-          {listItems}
-        </ul>
-      </div>
-    );
-  }
-}
-
-class HistoryMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.handleOption = this.handleOption.bind(this);
-  }
-
-  handleOption(event) {
-    this.props.onOption(event.target.value);
-  }
-
-  render() {
-    let items = ['Map', 'Real Time'];
-    let listItems = items.map((item) =>
-    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
-    );
-    return (
-      <div className="HistoryMenu">
+      <div className="ConsumptionMenu">
         <ul>
           {listItems}
         </ul>
@@ -100,11 +75,8 @@ class ContextMenu extends Component {
       case 'Map':
         menu = <MapMenu count={this.props.count} onOption={this.props.onOption} />;
         break;
-      case 'Real Time':
-        menu = <RealTimeMenu onOption={this.props.onOption} />;
-        break;
-      case 'History':
-        menu = <HistoryMenu onOption={this.props.onOption}/>;
+      case 'Consumption':
+        menu = <ConsumptionMenu onOption={this.props.onOption}/>;
         break;
     }
     return (

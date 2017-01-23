@@ -4,7 +4,7 @@
   padding: 0;
   z-index: 1;
   background-color: whitesmoke;
-  box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
   min-width: 200px;
   top: 2%;
   left: 50%;
@@ -16,12 +16,12 @@
 .Logo,
 .Search {
   margin: auto;
-  padding: 4px 8px;
+  padding: 4px 18px;
 }
 
 .Menu:hover,
 .Search:hover {
-  box-shadow: 3px 0 4px 0 rgba(4, 4, 4, 0.5), -3px 0 4px 0 rgba(4, 4, 4, 0.5);
+  box-shadow: 2px 0 2px 0 rgba(4, 4, 4, 0.5), -2px 0 2px 0 rgba(4, 4, 4, 0.5);
   cursor: pointer;
 }
 
