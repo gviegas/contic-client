@@ -33,12 +33,9 @@ class MapMenu extends Component {
     ); 
     return (
       <div className="MapMenu">
-        {
-          this.props.count > 0 &&
-          <ul>
-            {listItems}
-          </ul>
-        }
+        <ul>
+          {listItems}
+        </ul>
       </div>
     );
   }
@@ -73,7 +70,7 @@ class ContextMenu extends Component {
     let menu = null;
     switch(this.props.context) {
       case 'Map':
-        menu = <MapMenu count={this.props.count} onOption={this.props.onOption} />;
+        menu = <MapMenu onOption={this.props.onOption} />;
         break;
       case 'Consumption':
         menu = <ConsumptionMenu onOption={this.props.onOption}/>;

@@ -12,21 +12,54 @@
   transform: translate(-50%, -2%);
 }
 
-.Menu,
+.MenuIcon,
 .Logo,
-.Search {
+.SearchIcon {
   margin: auto;
   padding: 4px 18px;
 }
 
+/*.MenuIcon:hover,
+.SearchIcon:hover {*/ 
 .Menu:hover,
 .Search:hover {
   box-shadow: 2px 0 2px 0 rgba(4, 4, 4, 0.5), -2px 0 2px 0 rgba(4, 4, 4, 0.5);
   cursor: pointer;
 }
 
+.MenuList,
+.SearchInput {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  margin: 2px;
+  background-color: whitesmoke;
+  box-shadow: 0 0 2px 2px rgba(4, 4, 4, 0.5);
+}
+
+.MenuList {
+  padding: 0;
+}
+.MenuList li {
+  list-style: none;
+  padding: 10px;
+}
+.MenuList li + li {
+  border-top: solid 1px rgba(0, 0, 0, 0.8);   
+}
+.MenuList li:hover {
+  color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.SearchInput input[type=search] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: whitesmoke;
+}
+
 .Menu {}
-
 .Logo {}
-
 .Search {}

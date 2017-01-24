@@ -8,6 +8,11 @@ import logoLabel from './img/logo.svg';
 import searchLabel from './img/search-label.svg';
 import './css/MainNav.css';
 
+const NavOpt = Object.freeze({
+  MENU : 'Menu',
+  SEARCH : 'Search'
+});
+
 class MenuIcon extends Component {
   constructor(props) {
     super(props);
@@ -57,12 +62,11 @@ class MenuList extends Component {
 class Menu extends Component {
   constructor(props) {
     super(props);
-    this.state = {show : false};
     this.handleMenuIconClick = this.handleMenuIconClick.bind(this);
   }
 
   handleMenuIconClick() {
-    this.setState({show : !this.state.show});
+    this.props.toShow(NavOpt.MENU, !this.props.showing[NavOpt.MENU]);
   }
 
   render() {
@@ -70,7 +74,7 @@ class Menu extends Component {
       <div className="Menu">
         <MenuIcon onClick={this.handleMenuIconClick} />
         {
-          this.state.show && 
+          this.props.showing[NavOpt.MENU] &&
           <MenuList items={['Units','Zones','Sign Out']} />
         }
       </div>
@@ -101,7 +105,7 @@ class SearchIcon extends Component {
   render() {
     return (
       <div className="SearchIcon" onClick={this.handleClick}>
-        <img src={searchLabel} alt="search" width="36" />
+        <img src={searchLabel} alt="Search" width="36" />
       </div>
     )
   }
@@ -127,7 +131,7 @@ class SearchInput extends Component {
     return (
       <div className="SearchInput">
         <form onSubmit={this.handleSubmit}>
-          <input type="search" placeholder="search..."
+          <input type="search" placeholder="Search..."
           value={this.props.value} 
           onChange={this.handleChange}
           />
@@ -140,14 +144,14 @@ class SearchInput extends Component {
 class Search extends Component {
   constructor(props) {
     super(props);
-    this.state = {show : false, inputValue : ''};
+    this.state = {inputValue : ''};
     this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearchInputSubmit = this.handleSearchInputSubmit.bind(this);
   }
 
   handleSearchIconClick() {
-    this.setState({show : !this.state.show});
+    this.props.toShow(NavOpt.SEARCH, !this.props.showing[NavOpt.SEARCH]);
   }
 
   handleSearchInputChange(value) {
@@ -160,8 +164,8 @@ class Search extends Component {
     return (
       <div className="Search">
         <SearchIcon onClick={this.handleSearchIconClick} />
-        {
-          this.state.show && 
+        { 
+          this.props.showing[NavOpt.SEARCH] &&
           <SearchInput value={this.state.inputValue}
           onChange={this.handleSearchInputChange}
           onSubmit={this.handleSearchInputSubmit}
@@ -173,12 +177,27 @@ class Search extends Component {
 }
 
 class MainNav extends Component {
+  constructor(props) {
+    super(props);
+    this.handleNavSelection = this.handleNavSelection.bind(this);
+    this.state = {showing: {}};
+  }
+
+  handleNavSelection(option, show) {
+    let aux = this.state.showing;
+    for(let key in aux) {
+      aux[key] = false;
+    }
+    aux[option] = show;
+    this.setState({showing: aux});
+  }
+
   render() {
     return (
       <nav className="MainNav">
-        <Menu />
+        <Menu showing={this.state.showing} toShow={this.handleNavSelection} />
         <Logo />
-        <Search />
+        <Search showing={this.state.showing} toShow={this.handleNavSelection} />
       </nav>
     );
   }

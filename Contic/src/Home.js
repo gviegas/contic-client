@@ -18,8 +18,7 @@ class Home extends Component {
     this.handleSelection = this.handleSelection.bind(this);
     this.state = { 
       navOption : null,
-      menuOption : 'Map',
-      count : 0
+      menuOption : 'Map'
     };
     this.selection = {};
   }
@@ -36,12 +35,10 @@ class Home extends Component {
     let key = String(marker.position);
     if(insert) {
       this.selection[key] = marker;
-      this.setState({count : this.state.count + 1});
     } else {
       delete this.selection[key];
-      this.setState({count : this.state.count - 1});
     }
-    //console.log(this.selection);
+    console.log(this.selection);
   }
 
   render() {
@@ -60,7 +57,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <MainNav onNavOption={this.handleNavOption} />
-        <ContextMenu context={current} count={this.state.count} onOption={this.handleMenuOption} />
+        <ContextMenu context={current} onOption={this.handleMenuOption} />
         <div className="Context">
           {context}
         </div>
