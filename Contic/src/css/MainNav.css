@@ -30,10 +30,10 @@
 .MenuList,
 .SearchInput {
   position: absolute;
-  top: 105%;
-  left: 0;
-  right: 0;
-  margin: 2px;
+  top: 110%;
+  left: 3%;
+  right: 3%;
+  margin: auto;
   background-color: whitesmoke;
   box-shadow: 0 0 2px 2px rgba(4, 4, 4, 0.5);
 }
@@ -46,7 +46,7 @@
   padding: 10px;
 }
 .MenuList li + li {
-  border-top: solid 1px rgba(0, 0, 0, 0.8);   
+  border-top: outset 1px rgba(0, 0, 0, 0.5);
 }
 .MenuList li:hover {
   color: whitesmoke;

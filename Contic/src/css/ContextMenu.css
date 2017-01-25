@@ -3,7 +3,7 @@
   z-index: 1;
   top: 30%;
   left: 1%;
-  background-color: rgba(4, 4, 4, 0.5);
+  /*background-color: rgba(4, 4, 4, 0.5);*/
   transform: translate(-1%, -30%);
 }
 
@@ -22,28 +22,19 @@
   padding: 12px;
   width: 99%;
   min-width: 140px;
-  background-color: rgba(4, 4, 4, 0.3);
   color: whitesmoke;
-  border-style: hidden;
+  border: none;
+  background-color: rgba(4, 4, 4, 0.6);
 }
 
 .ContextMenu input[type=button]:hover {
-  background-color: rgba(4, 4, 4, 0.7);
+  background-color: rgba(4, 4, 4, 0.8);
   cursor: pointer;
 }
 
-/* On Map context */
-.MapMenu .MenuItemMap input[type=button] {
-  background-color: rgba(4, 4, 4, 0.7);
-}
-.MapMenu .MenuItemMap input[type=button]:hover {
-  cursor: default;
-}
-
-/* On Consumption context */
+/* Current context */
+.MapMenu .MenuItemMap input[type=button],
 .ConsumptionMenu .MenuItemConsumption input[type=button] {
-  background-color: rgba(4, 4, 4, 0.7);
-}
-.ConsumptionMenu .MenuItemConsumption input[type=button]:hover {
+  background-color: rgba(4, 4, 4, 0.8);
   cursor: default;
 }

@@ -4,12 +4,14 @@
 
 import React, { Component } from 'react';
 import DChart from './DChart';
+import ChartInfo from './ChartInfo';
 
 class Chart extends Component {
   render() {
     return (
       <div className="Chart">
         <DChart />
+        <ChartInfo />
       </div>
     );
   }

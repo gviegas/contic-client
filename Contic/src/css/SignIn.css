@@ -29,7 +29,7 @@
 
 .SignIn input[type=submit] {
   margin: 16px 0;
-  padding: 16px 18px;
+  padding: 10px 16px;
   background: gold;
   border: none;
   border-radius: 4px;
