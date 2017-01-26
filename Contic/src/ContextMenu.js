@@ -5,12 +5,12 @@
 import React, { Component } from 'react';
 import './css/ContextMenu.css';
 
-const items = ['Map', 'Consumption'];
+const items = ['Map', 'Consumption', 'Heat Map'];
 
 class ContextMenuItem extends Component {
   render() {
     return (
-      <li className={"MenuItem" + this.props.value}>
+      <li className={"MenuItem" + this.props.value.replace(' ', '')} >
         <input type="button" value={this.props.value} onClick={this.props.onClick} />
       </li>
     );
@@ -65,6 +65,30 @@ class ConsumptionMenu extends Component {
   }
 }
 
+class HeatMapMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.handleOption = this.handleOption.bind(this);
+  }
+
+  handleOption(event) {
+    this.props.onOption(event.target.value);
+  }
+  
+  render() {
+    let listItems = items.map((item) =>
+    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
+    );
+    return (
+      <div className="HeatMapMenu">
+        <ul>
+          {listItems}
+        </ul>
+      </div>
+    );
+  }
+}
+
 class ContextMenu extends Component {
   render() {
     let menu = null;
@@ -73,7 +97,10 @@ class ContextMenu extends Component {
         menu = <MapMenu onOption={this.props.onOption} />;
         break;
       case 'Consumption':
-        menu = <ConsumptionMenu onOption={this.props.onOption}/>;
+        menu = <ConsumptionMenu onOption={this.props.onOption} />;
+        break;
+      case 'Heat Map':
+        menu = <HeatMapMenu onOption={this.props.onOption} />;
         break;
     }
     return (

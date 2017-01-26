@@ -1,8 +1,5 @@
 .Home {}
 
 .Context {
-  position: absolute;
-  top: 15%;
-  left: 0;
-  right: 0;
+  transform: translate(0, 15%);
  }

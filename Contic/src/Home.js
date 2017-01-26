@@ -53,6 +53,10 @@ class Home extends Component {
         context = <Chart />;
         current = 'Consumption';
         break;
+      case 'Heat Map':
+        context = null; // todo
+        current = 'Heat Map';
+        break;
     }
     return (
       <div className="Home">

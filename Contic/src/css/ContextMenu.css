@@ -13,8 +13,8 @@
   list-style: none;
 }
 
-.ContextMenu li + li{
-  padding-top: 1px;
+.ContextMenu li + li {
+  padding-top: 2px;
 }
 
 .ContextMenu input[type=button] {
@@ -34,7 +34,8 @@
 
 /* Current context */
 .MapMenu .MenuItemMap input[type=button],
-.ConsumptionMenu .MenuItemConsumption input[type=button] {
+.ConsumptionMenu .MenuItemConsumption input[type=button],
+.HeatMapMenu .MenuItemHeatMap input[type=button] {
   background-color: rgba(4, 4, 4, 0.8);
   cursor: default;
 }

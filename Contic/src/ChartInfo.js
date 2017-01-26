@@ -70,7 +70,9 @@ class ChartInfo extends Component {
   render() {
     return (
       <div className="ChartInfo">
-        <DayInfo peakHour="10" averageHour="3" />
+        <YearInfo peakMonth="Feb" averageMonth="198" /> 
+        <WeekInfo peakDay="Sun" averageDay="6.6" />
+        <DayInfo peakHour="7pm" averageHour="0.28" />
       </div>
     );
   }
