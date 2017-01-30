@@ -182,6 +182,7 @@ class InfoWindow extends Component {
     this.open = this.open.bind(this);
     // eslint-disable-next-line
     this.infoWindow = new google.maps.InfoWindow({});
+    this.infoWindow.addListener('closeclick', () => this.props.onClose());
   }
 
   open() {
@@ -190,7 +191,7 @@ class InfoWindow extends Component {
   }
 
   render() {
-    if(this.props.data['marker']) { this.open(); }
+    if(this.props.data && this.props.data['marker']) { this.open(); }
     return null;
   }
 }
@@ -203,8 +204,24 @@ class Marker extends Component {
       position : this.props.position,
       map : this.props.map
     });
+    this.selected = false;
+    this.marker.addListener('mouseover', () => {
+      this.props.onMouseOver({marker : this.marker, content : this.props.content});
+    });
+    this.marker.addListener('mouseout', () => {
+      this.props.onMouseOut();
+    });
     this.marker.addListener('click', () => { 
-      this.props.onClick({marker : this.marker, content : this.props.content});
+      if(!this.selected) {
+        this.selected = true;
+        this.props.onClick(this.marker, true);
+        // eslint-disable-next-line
+        this.marker.setAnimation(google.maps.Animation.BOUNCE);
+      } else {
+        this.selected = false;
+        this.props.onClick(this.marker, false);
+        this.marker.setAnimation(null);
+      }
     });
   }
 
@@ -227,32 +244,52 @@ class GMap extends Component {
       styles : style,
       disableDefaultUI : true      
     });
-    this.handleMarkerClick = this.handleMarkerClick.bind(this);
-    this.state = { markerClick : { marker : null, content : '' } };
+    this.handleMarkerMouseOver = this.handleMarkerMouseOver.bind(this);
+    this.handleMarkerMouseOut = this.handleMarkerMouseOut.bind(this);
+    this.handleInfoWindowClose = this.handleInfoWindowClose.bind(this);
+    this.state = { 
+      currentMarker : { marker : null, content : '' } 
+    };
   }
   
-  handleMarkerClick(data) {
-    this.setState({ markerClick : data});
+  handleMarkerMouseOver(data) {
+    this.setState({currentMarker : data});
   }
+
+  handleMarkerMouseOut() {} //this.setState({currentMarker : null});
+
+  handleInfoWindowClose() {} //todo
 
   render() {
     let markers = [];
     for(let key in info) {
       markers.push(
         <Marker key={key}
-        onClick={this.handleMarkerClick} 
         data={this.state.markerClick} 
         position={info[key]['position']}
-        content={info[key]['content']} 
-        map={this.map} />
+        content={info[key]['content']}
+        mode={this.props.mode}  
+        map={this.map} 
+        onMouseOver={this.handleMarkerMouseOver}
+        onMouseOut={this.handleMarkerMouseOut}
+        onClick={this.props.onMarkerClick} />
       );
     }
     return (
       <div className="GMap">
         {markers}
-        <InfoWindow data={this.state.markerClick} map={this.map} />
+        <InfoWindow data={this.state.currentMarker} map={this.map} 
+        onClose={this.handleInfoWindowClose} />
       </div>
     );
+  }
+
+  componentWillUnmount() {
+    let elem = document.getElementById('map');
+    while (elem.firstChild) {
+      elem.removeChild(elem.firstChild);
+    }
+    elem.parentNode.removeChild(elem);
   }
 }
 

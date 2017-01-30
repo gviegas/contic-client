@@ -36,7 +36,7 @@ class SignInFormUser extends Component {
   render() {
     return (
       <div className="SignInFormUser">
-        <input type="email" id="SignInFormUser" placeholder="user" maxLength="40" 
+        <input type="email" id="SignInFormUser" placeholder="User" maxLength="40" 
         value={this.props.value}
         onChange={this.handleChange} />
       </div>
@@ -57,7 +57,7 @@ class SignInFormPwd extends Component {
   render() {
     return (
       <div className="SignInFormPwd">
-        <input type="password" id="SignInFormPwd" placeholder="password" minLength="8" maxLength="30" 
+        <input type="password" id="SignInFormPwd" placeholder="Password" minLength="8" maxLength="30" 
         value={this.props.value}
         onChange={this.handleChange} />
       </div>
@@ -68,7 +68,7 @@ class SignInFormPwd extends Component {
 class SignInFormSubmit extends Component {
   render() {
     return (
-      <div classsName="SignInFormSubmit">
+      <div className="SignInFormSubmit">
         <input type="submit" id="SignInFormSubmit" value="Submit" />
       </div>
     );
@@ -94,6 +94,7 @@ class SignInForm extends Component {
 
   handleSubmit(event) {
     alert(`submited: ${this.state.userValue} ${this.state.pwdValue}`); // test
+    this.props.onViewChange(null); // test
     event.preventDefault();
   }
 
@@ -113,7 +114,7 @@ class SignIn extends Component {
     return (
       <div className="SignIn">
         <SignInLogo />
-        <SignInForm />
+        <SignInForm onViewChange={this.props.onViewChange} />
       </div>
     );
   }

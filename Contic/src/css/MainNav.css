@@ -1,0 +1,65 @@
+.MainNav {
+  display: flex;
+  position: fixed;
+  padding: 0;
+  z-index: 1;
+  background-color: whitesmoke;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+  min-width: 200px;
+  top: 2%;
+  left: 50%;
+  /*margin-right: -50%;*/
+  transform: translate(-50%, -2%);
+}
+
+.MenuIcon,
+.Logo,
+.SearchIcon {
+  margin: auto;
+  padding: 4px 18px;
+}
+
+/*.MenuIcon:hover,
+.SearchIcon:hover {*/ 
+.Menu:hover,
+.Search:hover {
+  box-shadow: 2px 0 2px 0 rgba(4, 4, 4, 0.5), -2px 0 2px 0 rgba(4, 4, 4, 0.5);
+  cursor: pointer;
+}
+
+.MenuList,
+.SearchInput {
+  position: absolute;
+  top: 110%;
+  left: 3%;
+  right: 3%;
+  margin: auto;
+  background-color: whitesmoke;
+  box-shadow: 0 0 2px 2px rgba(4, 4, 4, 0.5);
+}
+
+.MenuList {
+  padding: 0;
+}
+.MenuList li {
+  list-style: none;
+  padding: 10px;
+}
+.MenuList li + li {
+  border-top: outset 1px rgba(0, 0, 0, 0.5);
+}
+.MenuList li:hover {
+  color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.SearchInput input[type=search] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: whitesmoke;
+}
+
+.Menu {}
+.Logo {}
+.Search {}
