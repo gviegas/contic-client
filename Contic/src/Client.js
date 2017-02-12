@@ -47,7 +47,11 @@ class Client {
   }
 
   send(d) {
-    this.socket.send(d); 
+    this.socket.send(d);
+  }
+
+  onEvent(name, callback) {
+    this.socket.on(name, callback);
   }
 }
 
