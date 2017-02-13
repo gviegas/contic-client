@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import client from './Client';
 import './css/DChart.css';
 
 const info = [
@@ -3183,6 +3184,12 @@ function createChart(settings) {
 }
 
 class DChart extends Component {
+  constructor(props) {
+    super(props);
+    
+    client.onEvent('units', (d) => createChart(options)());
+  }
+
   render() {
     return (
       <div className="DChart"></div>
@@ -3190,17 +3197,13 @@ class DChart extends Component {
   }
 
   componentDidMount() {
-    createChart(options)();
+    client.send({type: 'query', data: 'units'});
+    //createChart(options)();
   }
 
-  // componentWillUnmount() {
-  //   let elem = document.getElementsByClassName("DChart");
-  //   while (elem[0].firstChild) {
-  //     console.log(elem[0]);
-  //     elem[0].removeChild(elem[0].firstChild);
-  //   } 
-  // }
+  componentWillUnmount() {
+    client.removeEvent('units');
+  }
 }
 
-//export const DChart = createChart(options);
 export default DChart;

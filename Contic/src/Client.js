@@ -53,6 +53,16 @@ class Client {
   onEvent(name, callback) {
     this.socket.on(name, callback);
   }
+
+  removeEvent(name, listener = null) {
+    if(listener)
+      this.socket.removeListener(name, listener);
+    else
+      this.socket.removeAllListeners(name);
+  }
 }
 
-export default Client;
+const client = new Client();
+client.connect();
+
+export default client;

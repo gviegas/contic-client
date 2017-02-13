@@ -3,13 +3,8 @@
 //
 
 import React, { Component } from 'react';
+import client from './Client';
 import './css/GMap.css';
-
-// test
-import Client from './Client';
-const client = new Client();
-client.connect();
-// end test
 
 const style = 
 [
@@ -259,10 +254,8 @@ class GMap extends Component {
       currentMarker: { marker : null, content : '' },
       data:  null
     };
-
-    client.onEvent('units', (d) => {
-      this.setState({data: d});
-    });
+    
+    client.onEvent('units', (d) => this.setState({data: d}));
   }
   
   handleMarkerMouseOver(data) {
@@ -312,6 +305,8 @@ class GMap extends Component {
       elem.removeChild(elem.firstChild);
     }
     elem.parentNode.removeChild(elem);
+
+    client.removeEvent('units');
   }
 }
 

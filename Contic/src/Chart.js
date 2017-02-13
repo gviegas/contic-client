@@ -69,11 +69,16 @@ class Chart extends Component {
     this.state = {date: null, year: '', month: '', day: ''};
   }
 
-  // doing
   handleDateSubmit() {
-    let date = '';
-    //console.log(this.state);
-    this.setState({date: date});
+    //setTimeout(() => console.log(this.state), 2000);
+    this.setState({
+      //date: new Date(this.state.year, this.state.month - 1, this.state.day)
+      date: {
+        year: this.state.year, 
+        month: this.state.month, 
+        day: this.state.day
+      }
+    });
   }
 
   handleYearChange(value) {
