@@ -3187,7 +3187,7 @@ class DChart extends Component {
   constructor(props) {
     super(props);
     
-    client.onEvent('units', (d) => createChart(options)());
+    client.onEvent('consumption', (d) => createChart(options)());
   }
 
   render() {
@@ -3197,12 +3197,12 @@ class DChart extends Component {
   }
 
   componentDidMount() {
-    client.send({type: 'query', data: 'units'});
-    //createChart(options)();
+    // test
+    client.send({type: 'query', data: 'consumption', target: this.props.selection});
   }
 
   componentWillUnmount() {
-    client.removeEvent('units');
+    client.removeEvent('consumption');
   }
 }
 

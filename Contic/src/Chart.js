@@ -106,7 +106,7 @@ class Chart extends Component {
         onDayChange={this.handleDayChange} /> 
       :
       <div className="Chart">
-        <DChart date={this.state.date} />
+        <DChart selection={this.props.selection} date={this.state.date} />
         <ChartInfo />
       </div>
     );

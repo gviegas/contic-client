@@ -216,12 +216,14 @@ class Marker extends Component {
     this.marker.addListener('click', () => { 
       if(!this.selected) {
         this.selected = true;
-        this.props.onClick(this.marker, true);
+        this.props.onClick(this.props.id, true);
+        //this.props.onClick(this.marker, true);
         // eslint-disable-next-line
         this.marker.setAnimation(google.maps.Animation.BOUNCE);
       } else {
         this.selected = false;
-        this.props.onClick(this.marker, false);
+        this.props.onClick(this.props.id, false);
+        //this.props.onClick(this.marker, false);
         this.marker.setAnimation(null);
       }
     });
@@ -273,8 +275,9 @@ class GMap extends Component {
       for(let entry of entries) {
         markers.push(
           <Marker key={entry['_id']}
-          data={this.state.markerClick} 
+          //data={this.state.markerClick} 
           position={{lat: entry['location'][0], lng: entry['location'][1]}}
+          id={entry['id']}
           content={entry['id']}
           mode={this.props.mode}  
           map={this.map} 

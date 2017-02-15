@@ -19,7 +19,7 @@ class Home extends Component {
       navOption : null,
       menuOption : 'Map'
     };
-    this.selection = {};
+    this.selection = new Set();
   }
 
   handleNavOption(option) { console.log(`Home - nav option: ${option}`); } // todo
@@ -31,13 +31,11 @@ class Home extends Component {
   }
 
   handleSelection(marker, insert) {
-    let key = String(marker.position);
-    if(insert) {
-      this.selection[key] = marker;
-    } else {
-      delete this.selection[key];
-    }
-    console.log(this.selection);
+    if(insert)
+      this.selection.add(marker);
+    else
+      this.selection.delete(marker);
+    console.log(this.selection); // debug
   }
 
   render() {
@@ -49,7 +47,7 @@ class Home extends Component {
         current = 'Map';
         break;
       case 'Consumption':
-        context = <Chart />;
+        context = <Chart selection={Array.from(this.selection)} />;
         current = 'Consumption';
         break;
       case 'Heat Map':
@@ -57,6 +55,9 @@ class Home extends Component {
         current = 'Heat Map';
         break;
     }
+
+    this.selection.clear();
+    
     return (
       <div className="Home">
         <MainNav onNavOption={this.handleNavOption} />
