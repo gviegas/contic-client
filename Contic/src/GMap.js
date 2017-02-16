@@ -244,7 +244,7 @@ class GMap extends Component {
     // eslint-disable-next-line
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: position,
-      zoom: 14,
+      zoom: 16,
       styles: style,
       disableDefaultUI: true      
     });
