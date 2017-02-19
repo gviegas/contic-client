@@ -3,6 +3,7 @@
 //
 
 import React, { Component } from 'react';
+import client from './Client';
 import './css/GMap.css';
 
 const style = 
@@ -167,13 +168,14 @@ const style =
   }
 ];
 
-const position = {lat : 64.9312715, lng : -19.0144547};
+const position = {lat : 40.635364, lng : -73.961016};
+// const position = {lat : 64.9312715, lng : -19.0144547};
 
-const info = {
-  u1 : {position : {lat : 63.9312120, lng : -19.2244528}, content : 'unit u1'},
-  u2 : {position : {lat : 64.9013208, lng : -19.1444537}, content : 'unit u2'},
-  u3 : {position : {lat : 64.431290, lng : -20.0094541}, content : 'unit u3'}
-};
+// const info = {
+//   u1 : {position : {lat : 63.9312120, lng : -19.2244528}, content : 'unit u1'},
+//   u2 : {position : {lat : 64.9013208, lng : -19.1444537}, content : 'unit u2'},
+//   u3 : {position : {lat : 64.431290, lng : -20.0094541}, content : 'unit u3'}
+// };
 
 
 class InfoWindow extends Component {
@@ -214,12 +216,14 @@ class Marker extends Component {
     this.marker.addListener('click', () => { 
       if(!this.selected) {
         this.selected = true;
-        this.props.onClick(this.marker, true);
+        this.props.onClick(this.props.id, true);
+        //this.props.onClick(this.marker, true);
         // eslint-disable-next-line
         this.marker.setAnimation(google.maps.Animation.BOUNCE);
       } else {
         this.selected = false;
-        this.props.onClick(this.marker, false);
+        this.props.onClick(this.props.id, false);
+        //this.props.onClick(this.marker, false);
         this.marker.setAnimation(null);
       }
     });
@@ -239,17 +243,21 @@ class GMap extends Component {
     document.getElementsByTagName('body')[0].appendChild(elem);
     // eslint-disable-next-line
     this.map = new google.maps.Map(document.getElementById('map'), {
-      center : position,
-      zoom : 6,
-      styles : style,
-      disableDefaultUI : true      
+      center: position,
+      zoom: 16,
+      styles: style,
+      disableDefaultUI: true      
     });
+
     this.handleMarkerMouseOver = this.handleMarkerMouseOver.bind(this);
     this.handleMarkerMouseOut = this.handleMarkerMouseOut.bind(this);
     this.handleInfoWindowClose = this.handleInfoWindowClose.bind(this);
     this.state = { 
-      currentMarker : { marker : null, content : '' } 
+      currentMarker: { marker : null, content : '' },
+      data:  null
     };
+    
+    client.onEvent('units', (d) => this.setState({data: d}));
   }
   
   handleMarkerMouseOver(data) {
@@ -261,28 +269,38 @@ class GMap extends Component {
   handleInfoWindowClose() {} //todo
 
   render() {
-    let markers = [];
-    for(let key in info) {
-      markers.push(
-        <Marker key={key}
-        data={this.state.markerClick} 
-        position={info[key]['position']}
-        content={info[key]['content']}
-        mode={this.props.mode}  
-        map={this.map} 
-        onMouseOver={this.handleMarkerMouseOver}
-        onMouseOut={this.handleMarkerMouseOut}
-        onClick={this.props.onMarkerClick} />
+    if(this.state.data) {
+      let entries = this.state.data;
+      let markers = [];
+      for(let entry of entries) {
+        markers.push(
+          <Marker key={entry['_id']}
+          //data={this.state.markerClick} 
+          position={{lat: entry['location'][0], lng: entry['location'][1]}}
+          id={entry['id']}
+          content={entry['id']}
+          mode={this.props.mode}  
+          map={this.map} 
+          onMouseOver={this.handleMarkerMouseOver}
+          onMouseOut={this.handleMarkerMouseOut}
+          onClick={this.props.onMarkerClick} />
+        );
+      }
+      return (
+        <div className="GMap">
+          {markers}
+          <InfoWindow data={this.state.currentMarker} map={this.map} 
+          onClose={this.handleInfoWindowClose} />
+        </div>
       );
     }
-    return (
-      <div className="GMap">
-        {markers}
-        <InfoWindow data={this.state.currentMarker} map={this.map} 
-        onClose={this.handleInfoWindowClose} />
-      </div>
-    );
+    client.send({type: 'query', data: 'units'});
+    return null;
   }
+
+  componentDidUpdate() {}
+
+  componentDidMount() {}
 
   componentWillUnmount() {
     let elem = document.getElementById('map');
@@ -290,6 +308,8 @@ class GMap extends Component {
       elem.removeChild(elem.firstChild);
     }
     elem.parentNode.removeChild(elem);
+
+    client.removeEvent('units');
   }
 }
 
