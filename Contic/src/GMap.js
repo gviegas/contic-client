@@ -105,7 +105,7 @@ class GMap extends Component {
       let markers = [];
       for(let entry of entries) {
         markers.push(
-          <Marker key={entry['_id']}
+          <Marker key={entry['id']}
           //data={this.state.markerClick} 
           position={{lat: entry['location'][0], lng: entry['location'][1]}}
           id={entry['id']}

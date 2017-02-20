@@ -15,7 +15,7 @@ const formatData = function(d) {
   for(let entry of d) {
     // eslint-disable-next-line
     let loc = new google.maps.LatLng(entry.location[0], entry.location[1]);
-    // let data = entry.data[9].value;
+    //let data = entry.data[0].value;
     let data = c++; // test
     r.push({location: loc, weight: data});
   }
