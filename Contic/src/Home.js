@@ -7,6 +7,7 @@ import MainNav from './MainNav';
 import ContextMenu from './ContextMenu';
 import Map from './Map';
 import Chart from './Chart';
+import HeatMap from './HeatMap';
 import './css/Home.css';
 
 class Home extends Component {
@@ -51,7 +52,7 @@ class Home extends Component {
         current = 'Consumption';
         break;
       case 'Heat Map':
-        context = null; // todo
+        context = <HeatMap />;
         current = 'Heat Map';
         break;
     }

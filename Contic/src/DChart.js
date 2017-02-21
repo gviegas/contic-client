@@ -12,8 +12,7 @@ const SETTINGS = {
   width : 800,
   height : 500,
   margin : { top : 20, right : 20, bottom : 110, left : 40 },
-  margin2 : { top : 430, right : 20, bottom : 30, left : 40 },
-  //parse : '%d %b %Y'
+  margin2 : { top : 430, right : 20, bottom : 30, left : 40 }
 };
 
 function createChart(settings) {
@@ -135,7 +134,7 @@ function createChart(settings) {
   }
 
   // function parse(d) {
-  //   let parseDate = d3.timeParse(settings.parse);
+  //   let parseDate = d3.timeParse('%d %b %Y');
   //   d.date = parseDate(d.date);
   //   d.consumption = +d.consumption;
   //   return d;
@@ -157,7 +156,7 @@ const parse = function(d) {
 }
 
 const formatData = function(d) {
-  let data = []
+  let data = [];
   for(let entry of d) {
     for(let datum of entry.data)
       data.push(parse(datum));
