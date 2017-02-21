@@ -11,12 +11,14 @@ const position = {lat : 40.634185, lng : -73.962016};
 
 const formatData = function(d) {
   let r = [];
-  let c = 1; // test
+  // let c = 1; // test
   for(let entry of d) {
     // eslint-disable-next-line
-    let loc = new google.maps.LatLng(entry.location[0], entry.location[1]);
-    //let data = entry.data[0].value;
-    let data = c++; // test
+    let loc = new google.maps.LatLng(
+      entry.location['coordinates'][1], entry.location['coordinates'][0]
+    ); // GeoJson point: [lng, lat], Gmaps: [lat, lng]
+    let data = entry.data[0].value;
+    // let data = c++; // test
     r.push({location: loc, weight: data});
   }
   console.log(r); // debug

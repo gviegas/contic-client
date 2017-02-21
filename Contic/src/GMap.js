@@ -106,8 +106,10 @@ class GMap extends Component {
       for(let entry of entries) {
         markers.push(
           <Marker key={entry['id']}
-          //data={this.state.markerClick} 
-          position={{lat: entry['location'][0], lng: entry['location'][1]}}
+          position={{
+            lat: entry['location']['coordinates'][1], 
+            lng: entry['location']['coordinates'][0]
+          }} // GeoJson coords are in [lng, lat] order but Gmaps uses [lat, lng]...
           id={entry['id']}
           content={entry['id']}
           mode={this.props.mode}  
