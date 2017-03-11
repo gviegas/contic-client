@@ -7,7 +7,8 @@ import client from './Client';
 import { MAP_STYLE } from './Defs';
 import './css/GMap.css';
 
-const position = {lat : 40.634185, lng : -73.962016};
+const pushpin = 'http://localhost:3000/pushpin.png';
+const position = {lat: 51.511341, lng: -0.127787};
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -35,7 +36,8 @@ class Marker extends Component {
     // eslint-disable-next-line
     this.marker = new google.maps.Marker({
       position : this.props.position,
-      map : this.props.map
+      map : this.props.map,
+      icon: pushpin
     });
     this.selected = false;
     this.marker.addListener('mouseover', () => {
@@ -75,7 +77,7 @@ class GMap extends Component {
     // eslint-disable-next-line
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: position,
-      zoom: 17,
+      zoom: 18,
       styles: MAP_STYLE,
       disableDefaultUI: true      
     });
