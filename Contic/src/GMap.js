@@ -7,7 +7,7 @@ import client from './Client';
 import { MAP_STYLE } from './Defs';
 import './css/GMap.css';
 
-const pushpin = 'http://localhost:3000/pushpin.png';
+const pushpin = 'http://localhost:3000/pin/pushpin.png';
 const position = {lat: 51.511341, lng: -0.127787};
 
 class InfoWindow extends Component {
