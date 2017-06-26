@@ -7,7 +7,7 @@ import { MAP_STYLE } from './Defs';
 import client from './Client';
 import './css/GMap.css';
 
-const position = {lat: 51.511110, lng: -0.127877};
+const position = {lat: 51.65086, lng: -0.18601};
 
 const formatData = function(d) {
   let r = [];
@@ -28,7 +28,7 @@ const formatData = function(d) {
 class GHeatMap extends Component {
   constructor(props) {
     super(props);
-    // TODO: shouldn't create the map div here 
+    // TODO: shouldn't create the map div here
     let elem = document.createElement('div');
     elem.id = 'map';
     document.getElementsByTagName('body')[0].appendChild(elem);
@@ -37,7 +37,7 @@ class GHeatMap extends Component {
       center: position,
       zoom: 15,
       styles: MAP_STYLE,
-      disableDefaultUI: true      
+      disableDefaultUI: true
     });
     // eslint-disable-next-line
     this.heatmap = new google.maps.visualization.HeatmapLayer();

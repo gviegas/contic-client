@@ -7,8 +7,8 @@ import client from './Client';
 import { MAP_STYLE } from './Defs';
 import './css/GMap.css';
 
-const pushpin = 'http://localhost:3000/pin/pushpin.png';
-const position = {lat: 51.511341, lng: -0.127787};
+const pushpin = 'http://localhost:3000/pin/pushpin-s.png';
+const position = {lat: 51.65166, lng: -0.18601};
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Marker extends Component {
     this.marker.addListener('mouseout', () => {
       this.props.onMouseOut();
     });
-    this.marker.addListener('click', () => { 
+    this.marker.addListener('click', () => {
       if(!this.selected) {
         this.selected = true;
         this.props.onClick(this.props.id, true);
@@ -70,7 +70,7 @@ class Marker extends Component {
 class GMap extends Component {
   constructor(props) {
     super(props);
-    // TODO: shouldn't create the map div here 
+    // TODO: shouldn't create the map div here
     let elem = document.createElement('div');
     elem.id = 'map';
     document.getElementsByTagName('body')[0].appendChild(elem);
@@ -79,20 +79,20 @@ class GMap extends Component {
       center: position,
       zoom: 18,
       styles: MAP_STYLE,
-      disableDefaultUI: true      
+      disableDefaultUI: true
     });
 
     this.handleMarkerMouseOver = this.handleMarkerMouseOver.bind(this);
     this.handleMarkerMouseOut = this.handleMarkerMouseOut.bind(this);
     this.handleInfoWindowClose = this.handleInfoWindowClose.bind(this);
-    this.state = { 
+    this.state = {
       currentMarker: { marker : null, content : '' },
       data:  null
     };
-    
+
     client.onEvent('units', (d) => this.setState({data: d}));
   }
-  
+
   handleMarkerMouseOver(data) {
     this.setState({currentMarker : data});
   }
@@ -109,13 +109,13 @@ class GMap extends Component {
         markers.push(
           <Marker key={entry['id']}
           position={{
-            lat: entry['location']['coordinates'][1], 
+            lat: entry['location']['coordinates'][1],
             lng: entry['location']['coordinates'][0]
           }} // GeoJson coords are in [lng, lat] order but Gmaps uses [lat, lng]...
           id={entry['id']}
           content={entry['id']}
-          mode={this.props.mode}  
-          map={this.map} 
+          mode={this.props.mode}
+          map={this.map}
           onMouseOver={this.handleMarkerMouseOver}
           onMouseOut={this.handleMarkerMouseOut}
           onClick={this.props.onMarkerClick} />
@@ -124,7 +124,7 @@ class GMap extends Component {
       return (
         <div className="GMap">
           {markers}
-          <InfoWindow data={this.state.currentMarker} map={this.map} 
+          <InfoWindow data={this.state.currentMarker} map={this.map}
           onClose={this.handleInfoWindowClose} />
         </div>
       );
