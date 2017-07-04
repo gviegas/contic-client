@@ -8,7 +8,7 @@ const MESSAGE = Object.freeze({
   type: {
     query: 'query',
     insert: 'insert',
-    delete: 'delete',  
+    delete: 'delete',
   }
 });
 
@@ -30,8 +30,8 @@ class Client {
     // eslint-disable-next-line
     this.socket = io(addr);
 
-    this.socket.on('connect', () => {  
-      this.socket.on('message', (d) => { 
+    this.socket.on('connect', () => {
+      this.socket.on('message', (d) => {
         console.log('Message Received:');
         console.log(d);
       });

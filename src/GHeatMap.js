@@ -49,6 +49,7 @@ class GHeatMap extends Component {
       // this.heatmap = new google.maps.Visualization.HeatmapLayer({
       //   data: formatData(d)
       // });
+      console.log(d, d[0].time, d[0].value); // debug
       this.heatmap.setData(formatData(d));
       this.heatmap.setMap(this.map);
     });
