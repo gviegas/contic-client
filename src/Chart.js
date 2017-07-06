@@ -39,17 +39,17 @@ class DateDialog extends Component {
         <form className="DateDialogForm" onSubmit={this.handleSubmit}>
           <label>
             Year
-            <input type="text" placeholder="YYYY" 
+            <input type="text" placeholder="YYYY"
               value={this.props.year} onChange={this.handleYearChange} />
           </label>
           <label>
             Month
-            <input type="text" placeholder="MM" 
+            <input type="text" placeholder="MM"
               value={this.props.month} onChange={this.handleMonthChange} />
           </label>
           <label>
             Day
-            <input type="text" placeholder="DD" 
+            <input type="text" placeholder="DD"
               value={this.props.day} onChange={this.handleDayChange} />
           </label>
           <input type="submit" id="DateDialogForm" value="OK" />
@@ -74,8 +74,8 @@ class Chart extends Component {
     this.setState({
       //date: new Date(this.state.year, this.state.month - 1, this.state.day)
       date: {
-        year: this.state.year, 
-        month: this.state.month, 
+        year: this.state.year,
+        month: this.state.month,
         day: this.state.day
       }
     });
@@ -95,16 +95,16 @@ class Chart extends Component {
 
   render() {
     return (
-      !this.state.date 
-      ?
-      <DateDialog onSubmit={this.handleDateSubmit} 
-        year={this.state.year} 
-        month={this.state.month} 
-        day={this.state.day}
-        onYearChange={this.handleYearChange} 
-        onMonthChange={this.handleMonthChange} 
-        onDayChange={this.handleDayChange} /> 
-      :
+      // !this.state.date
+      // ?
+      // <DateDialog onSubmit={this.handleDateSubmit}
+      //   year={this.state.year}
+      //   month={this.state.month}
+      //   day={this.state.day}
+      //   onYearChange={this.handleYearChange}
+      //   onMonthChange={this.handleMonthChange}
+      //   onDayChange={this.handleDayChange} />
+      // :
       <div className="Chart">
         <DChart selection={this.props.selection} date={this.state.date} />
         <ChartInfo />

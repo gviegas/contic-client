@@ -19,7 +19,7 @@ const formatData = function(d) {
     ); // GeoJson point: [lng, lat], Gmaps: [lat, lng]
     let data = entry.data[0].value;
     // let data = c++; // test
-    r.push({location: loc, weight: data});
+    r.push({location: loc, weight: data*1000});
   }
   console.log(r); // debug
   return r;

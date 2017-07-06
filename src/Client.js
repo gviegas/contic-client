@@ -2,7 +2,7 @@
 // Created by Gustavo Viegas on 2017/02
 //
 
-const serverAddr = 'http://localhost/';
+import io from 'socket.io-client';
 
 const MESSAGE = Object.freeze({
   type: {
@@ -21,7 +21,7 @@ class Client {
     this.connected = false;
   }
 
-  connect(addr = serverAddr) {
+  connect(addr = 'http://localhost:4080/') {
     if(this.connected) {
       console.log('already connected');
       return;
