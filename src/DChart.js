@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import client from './Client';
 import './css/DChart.css';
 
 const SETTINGS = {
@@ -133,13 +132,6 @@ function createChart(settings) {
     context.select('.brush').call(brush.move, x.range().map(t.invertX, t));
   }
 
-  // function parse(d) {
-  //   let parseDate = d3.timeParse('%d %b %Y');
-  //   d.date = parseDate(d.date);
-  //   d.consumption = +d.consumption;
-  //   return d;
-  // }
-
   return create;
 }
 
@@ -161,10 +153,6 @@ const formatData = function(d) {
     for(let datum of entry.data)
       data.push(parse(datum));
   }
-
-  console.log('format:'); // debug
-  console.log(data); // debug
-
   return data.sort((a, b) => {
     if(a.date < b.date) return -1;
     if(a.date > b.date) return 1;
@@ -173,24 +161,12 @@ const formatData = function(d) {
 };
 
 class DChart extends Component {
-  constructor(props) {
-    super(props);
-    client.onEvent('consumption', (d) => createChart(SETTINGS)(formatData(d)));
-  }
-
   render() {
+    if(this.props.data)
+      createChart(SETTINGS)(formatData(this.props.data));
     return (
       <div className="DChart"></div>
     );
-  }
-
-  componentDidMount() {
-    // todo: date range
-    client.send({type: 'query', data: 'consumption', target: this.props.selection});
-  }
-
-  componentWillUnmount() {
-    client.removeEvent('consumption');
   }
 }
 

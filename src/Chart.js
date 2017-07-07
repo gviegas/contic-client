@@ -3,6 +3,7 @@
 //
 
 import React, { Component } from 'react';
+import client from './Client';
 import DChart from './DChart';
 import ChartInfo from './ChartInfo';
 import './css/Chart.css';
@@ -66,13 +67,12 @@ class Chart extends Component {
     this.handleYearChange = this.handleYearChange.bind(this);
     this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleDayChange = this.handleDayChange.bind(this);
-    this.state = {date: null, year: '', month: '', day: ''};
+    this.state = {date: null, year: '', month: '', day: '', data: null};
+    client.onEvent('consumption', (d) => this.setState({data: d}));
   }
 
   handleDateSubmit() {
-    //setTimeout(() => console.log(this.state), 2000);
     this.setState({
-      //date: new Date(this.state.year, this.state.month - 1, this.state.day)
       date: {
         year: this.state.year,
         month: this.state.month,
@@ -106,10 +106,19 @@ class Chart extends Component {
       //   onDayChange={this.handleDayChange} />
       // :
       <div className="Chart">
-        <DChart selection={this.props.selection} date={this.state.date} />
-        <ChartInfo />
+        <DChart data={this.state.data} />
+        <ChartInfo data={this.state.data} />
       </div>
     );
+  }
+
+  componentDidMount() {
+    client.send(
+      {type: 'query', data: 'consumption', target: this.props.selection});
+  }
+
+  componentWillUnmount() {
+    client.removeEvent('consumption');
   }
 }
 
