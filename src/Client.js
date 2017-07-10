@@ -4,26 +4,15 @@
 
 import io from 'socket.io-client';
 
-const MESSAGE = Object.freeze({
-  type: {
-    query: 'query',
-    insert: 'insert',
-    delete: 'delete',
-  }
-});
-
 class Client {
   constructor() {
-    // let script = document.createElement('script');
-    // script.src = 'http://localhost/socket.io/socket.io.js';
-    // document.body.appendChild(script);
     this.socket = null;
     this.connected = false;
   }
 
   connect(addr = 'http://localhost:4080/') {
     if(this.connected) {
-      console.log('already connected');
+      console.log('Already connected');
       return;
     }
 
@@ -31,18 +20,12 @@ class Client {
     this.socket = io(addr);
 
     this.socket.on('connect', () => {
-      this.socket.on('message', (d) => {
-        console.log('Message Received:');
-        console.log(d);
-      });
-
       this.socket.on('disconnect', () => {
         this.connected = false;
-        console.log('disconnected');
+        console.log('Disconnected');
       });
-
       this.connect = true;
-      console.log('connected');
+      console.log('Connected');
     });
   }
 

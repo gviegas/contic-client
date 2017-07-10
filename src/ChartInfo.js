@@ -5,61 +5,25 @@
 import React, { Component } from 'react';
 import './css/ChartInfo.css';
 
-class YearInfo extends Component {
+class Info extends Component {
   render() {
     return (
-      <div className="YearInfo">
+      <div className="Info">
         <div>
-          <span>Peak Month:</span>
-          <span>{this.props.peakMonth}</span>
-        </div>
-        <div>
-          <span>Average per Month:</span>
-          <span>{this.props.averageMonth}</span>
-        </div>
-      </div>
-    );
-  }
-}
-
-class MonthInfo extends Component {
-  render() {
-    return (
-      <div className="MonthInfo">
-        <WeekInfo />
-      </div>
-    );  
-  }
-}
-
-class WeekInfo extends Component {
-  render() {
-    return (
-      <div className="WeekInfo">
-        <div>
-          <span>Peak Day:</span>
-          <span>{this.props.peakDay}</span>
+          <span>Selection:</span>
+          <span>
+            <ul>
+              {this.props.selection.map((v) => <li key={v}>{v}</li>)}
+            </ul>
+          </span>
         </div>
         <div>
           <span>Average per Day:</span>
-          <span>{this.props.averageDay}</span>
-        </div>
-      </div>
-    );
-  }
-}
-
-class DayInfo extends Component {
-  render() {
-    return (
-      <div className="DayInfo">
-        <div>
-          <span>Peak Hour:</span>
-          <span>{this.props.peakHour}</span>
+          <span>{this.props.avgDay}</span>
         </div>
         <div>
           <span>Average per Hour:</span>
-          <span>{this.props.averageHour}</span>
+          <span>{this.props.avgHour}</span>
         </div>
       </div>
     );
@@ -67,12 +31,40 @@ class DayInfo extends Component {
 }
 
 class ChartInfo extends Component {
+  constructor(props) {
+    super(props);
+    this.avg = {day: 0, hour: 0};
+  }
+
+  calculate() {
+    let days = {total:0, n: 0};
+    for(let entry of this.props.data) {
+      for(let data of entry.data) {
+        let s = data.time.split('-');
+        let date = new Date(s[0], s[1], s[2]);
+        if(!days[date]) {
+          days[date] = {v: 0};
+          ++days.n;
+        }
+        days[date].v += data.value;
+        days.total += data.value;
+      }
+    }
+    if(days.n) {
+      let d = days.total / days.n;
+      let h = d / 24;
+      this.avg = {day: d, hour: h};
+    }
+  }
+
   render() {
+    if(!this.props.data) return null;
+    this.calculate();
     return (
       <div className="ChartInfo">
-        <YearInfo peakMonth="Feb" averageMonth="198" /> 
-        <WeekInfo peakDay="Sun" averageDay="6.6" />
-        <DayInfo peakHour="7pm" averageHour="0.28" />
+        <Info selection={this.props.selection}
+          avgDay={this.avg.day.toPrecision(5)}
+          avgHour={this.avg.hour.toPrecision(5)} />
       </div>
     );
   }

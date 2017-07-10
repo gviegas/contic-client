@@ -17,7 +17,7 @@ class MenuIcon extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this);  
+    this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
   handleClick(event) {
@@ -28,7 +28,8 @@ class MenuIcon extends Component {
 
   render() {
     return (
-      <div className="MenuIcon" onClick={this.handleClick} onMouseOver={this.handleMouseOver}>
+      <div className="MenuIcon" onClick={this.handleClick}
+        onMouseOver={this.handleMouseOver}>
         <img src={menuLabel} alt="menu" width="36" />
       </div>
     );
@@ -45,12 +46,11 @@ class MenuItem extends Component {
   }
 }
 
-class MenuList extends Component {   
+class MenuList extends Component {
   render() {
     const items = this.props.items;
-    const listItems = items.map((item) => 
-    <MenuItem key={item.toString()} value={item} />
-    );
+    const listItems = items.map((item) =>
+      <MenuItem key={item.toString()} value={item} />);
     return (
       <ul className="MenuList">
         {listItems}
@@ -132,7 +132,7 @@ class SearchInput extends Component {
       <div className="SearchInput">
         <form onSubmit={this.handleSubmit}>
           <input type="search" placeholder="Search..."
-          value={this.props.value} 
+          value={this.props.value}
           onChange={this.handleChange}
           />
         </form>
@@ -158,13 +158,13 @@ class Search extends Component {
     this.setState({inputValue : value});
   }
 
-  handleSearchInputSubmit(value) {}
+  handleSearchInputSubmit(value) {} // TODO
 
   render() {
     return (
       <div className="Search">
         <SearchIcon onClick={this.handleSearchIconClick} />
-        { 
+        {
           this.props.showing[NavOpt.SEARCH] &&
           <SearchInput value={this.state.inputValue}
           onChange={this.handleSearchInputChange}
@@ -186,7 +186,8 @@ class MainNav extends Component {
   handleNavSelection(option, show) {
     let aux = this.state.showing;
     for(let key in aux) {
-      aux[key] = false;
+      if(aux.hasOwnProperty(key))
+        aux[key] = false;
     }
     aux[option] = show;
     this.setState({showing: aux});

@@ -94,8 +94,10 @@ class SignInForm extends Component {
   render() {
     return (
       <form className="SignInForm" onSubmit={this.handleSubmit}>
-        <SignInFormUser value={this.state.userValue} onChange={this.handleUserInput} />
-        <SignInFormPwd value={this.state.pwdValue} onChange={this.handlePwdInput} />
+        <SignInFormUser value={this.state.userValue}
+          onChange={this.handleUserInput} />
+        <SignInFormPwd value={this.state.pwdValue}
+          onChange={this.handlePwdInput} />
         <SignInFormSubmit />
       </form>
     );

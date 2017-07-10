@@ -35,6 +35,7 @@ class App extends Component {
       case 'Home':
         nextView = <Home onViewChange={this.handleViewChange} />;
         break;
+      default:;
     }
     return (
       <div className="App">

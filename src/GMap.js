@@ -3,12 +3,11 @@
 //
 
 import React, { Component } from 'react';
-import client from './Client';
 import { MAP_STYLE } from './Defs';
 import './css/GMap.css';
 
 const pushpin = 'http://localhost:3000/pin/pushpin-s.png';
-const position = {lat: 51.65166, lng: -0.18601};
+const position = {lat: 51.65106, lng: -0.18541};
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -25,7 +24,8 @@ class InfoWindow extends Component {
   }
 
   render() {
-    if(this.props.data && this.props.data['marker']) { this.open(); }
+    if(this.props.data && this.props.data['marker']) this.open();
+    else this.infoWindow.close();
     return null;
   }
 }
@@ -41,7 +41,7 @@ class Marker extends Component {
     });
     this.selected = false;
     this.marker.addListener('mouseover', () => {
-      this.props.onMouseOver({marker : this.marker, content : this.props.content});
+      this.props.onMouseOver({marker: this.marker, content: this.props.content});
     });
     this.marker.addListener('mouseout', () => {
       this.props.onMouseOut();
@@ -50,13 +50,11 @@ class Marker extends Component {
       if(!this.selected) {
         this.selected = true;
         this.props.onClick(this.props.id, true);
-        //this.props.onClick(this.marker, true);
         // eslint-disable-next-line
         this.marker.setAnimation(google.maps.Animation.BOUNCE);
       } else {
         this.selected = false;
         this.props.onClick(this.props.id, false);
-        //this.props.onClick(this.marker, false);
         this.marker.setAnimation(null);
       }
     });
@@ -70,6 +68,7 @@ class Marker extends Component {
 class GMap extends Component {
   constructor(props) {
     super(props);
+
     // TODO: shouldn't create the map div here
     let elem = document.createElement('div');
     elem.id = 'map';
@@ -85,33 +84,31 @@ class GMap extends Component {
     this.handleMarkerMouseOver = this.handleMarkerMouseOver.bind(this);
     this.handleMarkerMouseOut = this.handleMarkerMouseOut.bind(this);
     this.handleInfoWindowClose = this.handleInfoWindowClose.bind(this);
-    this.state = {
-      currentMarker: { marker : null, content : '' },
-      data:  null
-    };
-
-    client.onEvent('units', (d) => this.setState({data: d}));
+    this.state = {currentMarker: { marker : null, content : '' }};
   }
 
   handleMarkerMouseOver(data) {
     this.setState({currentMarker : data});
   }
 
-  handleMarkerMouseOut() {} //this.setState({currentMarker : null});
+  handleMarkerMouseOut() {
+    this.setState({currentMarker : null});
+  }
 
-  handleInfoWindowClose() {} //todo
+  handleInfoWindowClose() {} // TODO
 
   render() {
-    if(this.state.data) {
-      let entries = this.state.data;
+    if(this.props.data) {
+      let entries = this.props.data;
       let markers = [];
       for(let entry of entries) {
         markers.push(
           <Marker key={entry['id']}
+           // GeoJson coords are in [lng, lat] order but Gmaps uses [lat, lng]
           position={{
             lat: entry['location']['coordinates'][1],
             lng: entry['location']['coordinates'][0]
-          }} // GeoJson coords are in [lng, lat] order but Gmaps uses [lat, lng]...
+          }}
           id={entry['id']}
           content={entry['id']}
           mode={this.props.mode}
@@ -125,26 +122,18 @@ class GMap extends Component {
         <div className="GMap">
           {markers}
           <InfoWindow data={this.state.currentMarker} map={this.map}
-          onClose={this.handleInfoWindowClose} />
+            onClose={this.handleInfoWindowClose} />
         </div>
       );
     }
-    client.send({type: 'query', data: 'units'});
     return null;
   }
 
-  componentDidUpdate() {}
-
-  componentDidMount() {}
-
   componentWillUnmount() {
     let elem = document.getElementById('map');
-    while (elem.firstChild) {
+    while (elem.firstChild)
       elem.removeChild(elem.firstChild);
-    }
     elem.parentNode.removeChild(elem);
-
-    client.removeEvent('units');
   }
 }
 

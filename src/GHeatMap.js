@@ -4,30 +4,26 @@
 
 import React, { Component } from 'react';
 import { MAP_STYLE } from './Defs';
-import client from './Client';
 import './css/GMap.css';
 
 const position = {lat: 51.65086, lng: -0.18601};
 
 const formatData = function(d) {
   let r = [];
-  // let c = 1; // test
   for(let entry of d) {
     // eslint-disable-next-line
-    let loc = new google.maps.LatLng(
-      entry.location['coordinates'][1], entry.location['coordinates'][0]
-    ); // GeoJson point: [lng, lat], Gmaps: [lat, lng]
+    let loc = new google.maps.LatLng(entry.location['coordinates'][1],
+      entry.location['coordinates'][0]);
     let data = entry.data[0].value;
-    // let data = c++; // test
     r.push({location: loc, weight: data*1000});
   }
-  console.log(r); // debug
   return r;
 }
 
 class GHeatMap extends Component {
   constructor(props) {
     super(props);
+
     // TODO: shouldn't create the map div here
     let elem = document.createElement('div');
     elem.id = 'map';
@@ -41,22 +37,13 @@ class GHeatMap extends Component {
     });
     // eslint-disable-next-line
     this.heatmap = new google.maps.visualization.HeatmapLayer();
-
-    // this.state = {data: null};
-
-    client.onEvent('latest', (d) => {
-      // eslint-disable-next-line
-      // this.heatmap = new google.maps.Visualization.HeatmapLayer({
-      //   data: formatData(d)
-      // });
-      console.log(d, d[0].time, d[0].value); // debug
-      this.heatmap.setData(formatData(d));
-      this.heatmap.setMap(this.map);
-    });
   }
 
   render() {
-    client.send({type: 'query', data: 'latest'});
+    if(this.props.data) {
+      this.heatmap.setData(formatData(this.props.data));
+      this.heatmap.setMap(this.map);
+    }
     return (
       <div className="GHeatMap"></div>
     );
@@ -64,12 +51,9 @@ class GHeatMap extends Component {
 
   componentWillUnmount() {
     let elem = document.getElementById('map');
-    while (elem.firstChild) {
+    while (elem.firstChild)
       elem.removeChild(elem.firstChild);
-    }
     elem.parentNode.removeChild(elem);
-
-    client.removeEvent('latest');
   }
 }
 

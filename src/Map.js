@@ -3,12 +3,15 @@
 //
 
 import React, { Component } from 'react';
+import client from './Client';
 import GMap from './GMap';
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.onSelection = this.onSelection.bind(this);
+    this.state = {data: null};
+    client.onEvent('units', (d) => this.setState({data: d}));
   }
 
   onSelection(marker, insert) {
@@ -18,9 +21,17 @@ class Map extends Component {
   render() {
     return (
       <div className="Map">
-        <GMap onMarkerClick={this.onSelection} />
+        <GMap onMarkerClick={this.onSelection} data={this.state.data} />
       </div>
     );
+  }
+
+  componentDidMount() {
+    client.send({type: 'query', data: 'units'});
+  }
+
+  componentWillUnmount() {
+    client.removeEvent('units');
   }
 }
 
