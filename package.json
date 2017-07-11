@@ -1,13 +1,17 @@
 {
-  "name": "Contic",
-  "version": "0.1.0",
-  "private": true,
+  "name": "contic-client",
+  "version": "0.2.0",
+  "description": "Contic Client",
+  "author": "Gustavo Viegas",
+  "license": "MIT",
   "devDependencies": {
     "react-scripts": "0.8.4"
   },
   "dependencies": {
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "d3": "^4.9.1",
+    "socket.io": "^1.3.7"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -2,47 +2,30 @@
 // Created by Gustavo Viegas on 2017/02
 //
 
-const serverAddr = 'http://localhost/';
-
-const MESSAGE = Object.freeze({
-  type: {
-    query: 'query',
-    insert: 'insert',
-    delete: 'delete',  
-  }
-});
+import io from 'socket.io-client';
 
 class Client {
   constructor() {
-    // let script = document.createElement('script');
-    // script.src = 'http://localhost/socket.io/socket.io.js';
-    // document.body.appendChild(script);
     this.socket = null;
     this.connected = false;
   }
 
-  connect(addr = serverAddr) {
+  connect(addr = 'http://localhost:4080/') {
     if(this.connected) {
-      console.log('already connected');
+      console.log('Already connected');
       return;
     }
 
     // eslint-disable-next-line
     this.socket = io(addr);
 
-    this.socket.on('connect', () => {  
-      this.socket.on('message', (d) => { 
-        console.log('Message Received:');
-        console.log(d);
-      });
-
+    this.socket.on('connect', () => {
       this.socket.on('disconnect', () => {
         this.connected = false;
-        console.log('disconnected');
+        console.log('Disconnected');
       });
-
       this.connect = true;
-      console.log('connected');
+      console.log('Connected');
     });
   }
 

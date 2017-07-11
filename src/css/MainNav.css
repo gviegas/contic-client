@@ -3,12 +3,11 @@
   position: fixed;
   padding: 0;
   z-index: 1;
-  background-color: whitesmoke;
+  background-color: white;
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
   min-width: 200px;
   top: 2%;
   left: 50%;
-  /*margin-right: -50%;*/
   transform: translate(-50%, -2%);
 }
 
@@ -19,8 +18,6 @@
   padding: 4px 18px;
 }
 
-/*.MenuIcon:hover,
-.SearchIcon:hover {*/ 
 .Menu:hover,
 .Search:hover {
   box-shadow: 2px 0 2px 0 rgba(4, 4, 4, 0.5), -2px 0 2px 0 rgba(4, 4, 4, 0.5);
@@ -34,7 +31,7 @@
   left: 3%;
   right: 3%;
   margin: auto;
-  background-color: whitesmoke;
+  background-color: white;
   box-shadow: 0 0 2px 2px rgba(4, 4, 4, 0.5);
 }
 
@@ -49,7 +46,7 @@
   border-top: outset 1px rgba(0, 0, 0, 0.5);
 }
 .MenuList li:hover {
-  color: whitesmoke;
+  color: white;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -57,7 +54,7 @@
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 .Menu {}

@@ -16,19 +16,19 @@ class Home extends Component {
     this.handleNavOption = this.handleNavOption.bind(this);
     this.handleMenuOption = this.handleMenuOption.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
-    this.state = { 
+    this.state = {
       navOption : null,
       menuOption : 'Map'
     };
     this.selection = new Set();
   }
 
-  handleNavOption(option) { console.log(`Home - nav option: ${option}`); } // todo
-  
+  handleNavOption(option) {} // TODO
+
   handleMenuOption(option) {
-    if(option != this.state.menuOption) { 
+    if(option !== this.state.menuOption) {
       this.setState({menuOption : option});
-    }  
+    }
   }
 
   handleSelection(marker, insert) {
@@ -36,7 +36,6 @@ class Home extends Component {
       this.selection.add(marker);
     else
       this.selection.delete(marker);
-    console.log(this.selection); // debug
   }
 
   render() {
@@ -55,10 +54,11 @@ class Home extends Component {
         context = <HeatMap />;
         current = 'Heat Map';
         break;
+      default:;
     }
 
     this.selection.clear();
-    
+
     return (
       <div className="Home">
         <MainNav onNavOption={this.handleNavOption} />

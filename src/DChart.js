@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import client from './Client';
 import './css/DChart.css';
 
 const SETTINGS = {
@@ -19,26 +18,26 @@ function createChart(settings) {
   let width = settings.width - settings.margin.left - settings.margin.right;
   let height = settings.height - settings.margin.top - settings.margin.bottom;
   let height2 = settings.height - settings.margin2.top - settings.margin2.bottom;
-  
+
   let x = d3.scaleTime().range([0, width]);
   let y = d3.scaleLinear().range([height, 0]);
   let x2 = d3.scaleTime().range([0, width]);
   let y2 = d3.scaleLinear().range([height2, 0]);
-  
+
   let xAxis = d3.axisBottom(x);
   let yAxis = d3.axisLeft(y);
   let xAxis2 = d3.axisBottom(x2);
-  
+
   let brush = d3.brushX()
     .extent([[0, 0], [width, height2]])
     .on('brush end', brushed);
-  
+
   let zoom = d3.zoom()
     .scaleExtent([1, Infinity])
     .translateExtent([[0, 0], [width, height]])
     .extent([[0, 0], [width, height]])
     .on('zoom', zoomed);
-  
+
   let area = d3.area()
     .curve(d3.curveMonotoneX)
     .x((d) => x(d.date))
@@ -104,7 +103,7 @@ function createChart(settings) {
         .attr('class', 'brush')
         .call(brush)
         .call(brush.move, x.range());
-      
+
       svg.append('rect')
         .attr('class', 'zoom')
         .attr('width', width)
@@ -133,22 +132,15 @@ function createChart(settings) {
     context.select('.brush').call(brush.move, x.range().map(t.invertX, t));
   }
 
-  // function parse(d) {
-  //   let parseDate = d3.timeParse('%d %b %Y');
-  //   d.date = parseDate(d.date);
-  //   d.consumption = +d.consumption;
-  //   return d;
-  // }
-
   return create;
 }
 
 const parse = function(d) {
-  let parseDate = d3.timeParse("%Y-%m-%d");
+  let parseDate = d3.timeParse("%Y-%m-%d-%H-%M-%S");
 
   d.date = parseDate(d.time);
   d.consumption = +d.value;
-  
+
   delete d.time;
   delete d.value;
 
@@ -161,10 +153,6 @@ const formatData = function(d) {
     for(let datum of entry.data)
       data.push(parse(datum));
   }
-  
-  console.log('format:'); // debug
-  console.log(data); // debug
-  
   return data.sort((a, b) => {
     if(a.date < b.date) return -1;
     if(a.date > b.date) return 1;
@@ -173,24 +161,12 @@ const formatData = function(d) {
 };
 
 class DChart extends Component {
-  constructor(props) {
-    super(props);
-    client.onEvent('consumption', (d) => createChart(SETTINGS)(formatData(d)));
-  }
-
   render() {
+    if(this.props.data)
+      createChart(SETTINGS)(formatData(this.props.data));
     return (
       <div className="DChart"></div>
     );
-  }
-
-  componentDidMount() {
-    // todo: date range
-    client.send({type: 'query', data: 'consumption', target: this.props.selection});
-  }
-
-  componentWillUnmount() {
-    client.removeEvent('consumption');
   }
 }
 

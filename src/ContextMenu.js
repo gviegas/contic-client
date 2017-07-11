@@ -10,8 +10,9 @@ const items = ['Map', 'Consumption', 'Heat Map'];
 class ContextMenuItem extends Component {
   render() {
     return (
-      <li className={"MenuItem" + this.props.value.replace(' ', '')} >
-        <input type="button" value={this.props.value} onClick={this.props.onClick} />
+      <li className={"MenuItem" + this.props.value.replace(' ', '')}>
+        <input type="button" value={this.props.value}
+          onClick={this.props.onClick} />
       </li>
     );
   }
@@ -29,8 +30,8 @@ class MapMenu extends Component {
 
   render() {
     let listItems = items.map((item) =>
-    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
-    ); 
+      <ContextMenuItem key={item.toString()} value={item}
+      onClick={this.handleOption} />);
     return (
       <div className="MapMenu">
         <ul>
@@ -52,9 +53,9 @@ class ConsumptionMenu extends Component {
   }
 
   render() {
-    let listItems = items.map((item) => 
-    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
-    );
+    let listItems = items.map((item) =>
+      <ContextMenuItem key={item.toString()} value={item}
+      onClick={this.handleOption} />);
     return (
       <div className="ConsumptionMenu">
         <ul>
@@ -74,11 +75,11 @@ class HeatMapMenu extends Component {
   handleOption(event) {
     this.props.onOption(event.target.value);
   }
-  
+
   render() {
     let listItems = items.map((item) =>
-    <ContextMenuItem key={item.toString()} value={item} onClick={this.handleOption} />
-    );
+      <ContextMenuItem key={item.toString()} value={item}
+      onClick={this.handleOption} />);
     return (
       <div className="HeatMapMenu">
         <ul>
@@ -102,6 +103,7 @@ class ContextMenu extends Component {
       case 'Heat Map':
         menu = <HeatMapMenu onOption={this.props.onOption} />;
         break;
+      default:;
     }
     return (
       <div className="ContextMenu">

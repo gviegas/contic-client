@@ -2,19 +2,12 @@
 // Created by Gustavo Viegas on 2016/12
 //
 
-// SignIn
-// - SignInLogo
-// - SignInForm
-// -- SignInFormUser
-// -- SignInFormPwd
-// -- SignInFormSubmit
-
 import React, { Component } from 'react';
 import signInLogo from './img/signin-logo.svg';
 import './css/SignIn.css';
 
 class SignInLogo extends Component {
-  render() { 
+  render() {
     return (
       <div className="SignInLogo">
         <img src={signInLogo} width="400" alt="CONTIC" />
@@ -36,7 +29,7 @@ class SignInFormUser extends Component {
   render() {
     return (
       <div className="SignInFormUser">
-        <input type="email" id="SignInFormUser" placeholder="User" maxLength="40" 
+        <input type="email" id="SignInFormUser" placeholder="User" maxLength="40"
         value={this.props.value}
         onChange={this.handleChange} />
       </div>
@@ -57,7 +50,7 @@ class SignInFormPwd extends Component {
   render() {
     return (
       <div className="SignInFormPwd">
-        <input type="password" id="SignInFormPwd" placeholder="Password" minLength="8" maxLength="30" 
+        <input type="password" id="SignInFormPwd" placeholder="Password" minLength="8" maxLength="30"
         value={this.props.value}
         onChange={this.handleChange} />
       </div>
@@ -93,16 +86,18 @@ class SignInForm extends Component {
   }
 
   handleSubmit(event) {
-    alert(`submited: ${this.state.userValue} ${this.state.pwdValue}`); // test
-    this.props.onViewChange(null); // test
+    // TODO: signin logic
+    this.props.onViewChange(null);
     event.preventDefault();
   }
 
-  render() { 
+  render() {
     return (
       <form className="SignInForm" onSubmit={this.handleSubmit}>
-        <SignInFormUser value={this.state.userValue} onChange={this.handleUserInput} />
-        <SignInFormPwd value={this.state.pwdValue} onChange={this.handlePwdInput} />
+        <SignInFormUser value={this.state.userValue}
+          onChange={this.handleUserInput} />
+        <SignInFormPwd value={this.state.pwdValue}
+          onChange={this.handlePwdInput} />
         <SignInFormSubmit />
       </form>
     );
