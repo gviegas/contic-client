@@ -4,7 +4,7 @@
 
 Copyright (c) Facebook, Inc.
 
-React is licensed under the terms of the [BSD 3-Clause "New" or "Revised" License](https://opensource.org/licenses/BSD-3-Clause).
+React and Create React App are licensed under the terms of the [BSD 3-Clause "New" or "Revised" License](https://opensource.org/licenses/BSD-3-Clause).
 
 ### D3.js
 
