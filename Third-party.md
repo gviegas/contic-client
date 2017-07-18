@@ -1,6 +1,6 @@
 # Third Party Software
 
-### React
+### React and Create React App
 
 Copyright (c) Facebook, Inc.
 
